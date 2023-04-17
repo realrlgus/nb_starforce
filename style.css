@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("https://cdn.jsdelivr.net/gh/maple-world/jjal/img/background/1.jpg");
+  background-repeat: no-repeat;
+}
+
+div {
+  color: crimson;
+  font-weight: bolder;
+}
+
+.text-green {
+  color: green;
+}
+.bc-blue {
+  background-color: blue;
+}
+
+.box {
+  background-color: white;
+  border-style: solid;
+  border-color: cyan;
+  border-width: 10px;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0px;
+  text-align: center;
+}
+
+input[type="number"],
+select {
+  appearance: none;
+  padding: 5px;
+  width: 90px;
+  border: 1px solid hotpink;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.boxbox span {
+  display: inline-block;
+  width: 100px;
+  margin: 15px 0px;
+}
