@@ -5,25 +5,22 @@
 body {
   background-image: url("https://cdn.jsdelivr.net/gh/maple-world/jjal/img/background/1.jpg");
   background-repeat: no-repeat;
+  max-width: 1920px;
+  margin: 0 auto;
+  background-position-x: center;
 }
 
 div {
-  color: crimson;
+  /* color: #023047; */
+  color: white;
   font-weight: bolder;
 }
 
-.text-green {
-  color: green;
-}
-.bc-blue {
-  background-color: blue;
-}
-
 .box {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
   border-style: solid;
-  border-color: cyan;
-  border-width: 10px;
+  border-color: #fcf6bd;
+  border-width: 5px;
   border-radius: 20px;
   padding: 20px;
   margin: 20px 0px;
@@ -35,7 +32,7 @@ select {
   appearance: none;
   padding: 5px;
   width: 90px;
-  border: 1px solid hotpink;
+  border: 1px solid #778da9;
   border-radius: 5px;
   text-align: center;
 }
@@ -44,4 +41,46 @@ select {
   display: inline-block;
   width: 100px;
   margin: 15px 0px;
+}
+
+.header {
+  background-color: rgba(254, 250, 224, 0.5);
+  padding: 5px 15px;
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.avatar {
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+input[type="button"] {
+  appearance: none;
+  padding: 10px 0px;
+  width: 120px;
+  background-color: #3c6e719d;
+  border: 1px solid #c7f9cc;
+  color: rgba(140, 252, 35, 0.877);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input[type="button"]:hover {
+  background-color: #3c7f9c;
+  border: 1px solid #c6e719dc;
+  color: white;
 }
