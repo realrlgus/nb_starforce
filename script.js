@@ -1,37 +1,30 @@
-// 변수
-// 예약어 let const
-// 예약어 변수명(응배) = "응배최고";
+const 강화 = document.getElementById("강화버튼");
+const 시도횟수 = document.getElementById("시도");
+const 총메소 = document.getElementById("총메소");
+// ToDo: 필요메소 직접 구하기
+const 필요메소 = 100000;
 
-let 응배 = "배트";
+function 강화함수() {
+  시도횟수.innerText = +시도횟수.innerText + 1;
+  총메소.innerText = (
+    +총메소.innerText.replaceAll(",", "") + 필요메소
+  ).toLocaleString();
 
-응배 = "로어";
+  // 1. 총메소.innerText = 1000 (문자열 )
+  // 2. +총메소.innerText = 1000 (숫자)
+  // 3. 필요메소 100000 (숫자)
+  // 4. +총메소.innerText + 필요메소 = 101000 (숫자)
+  // 5. (101000 -> 4번의 결과값).toLocaleString(); = 101,000 (문자열)
+  // 6. 총메소.innerText = 101,000 (문자열)
+  // 7. 총메소.innerText.replaceAll(",",""); => 총 메소에 있는 쉼표를 모두 찾아서 없앤다
+  // 8. 총메소.innerText = 101000 (문자열)
+  // 9. +총메소.innerText = 101000 (숫자)
 
-console.log(응배);
-
-const 리얼 = "기거스";
-
-console.log(리얼);
-
-const 메소 = 1500;
-const 아이템값 = 1500;
-
-if (메소 === 아이템값) {
-  console.log("구매 완료");
-} else if (메소 < 아이템값) {
-  console.log("메소가 부족합니다");
+  // +총메소.innerText = 0(숫자)
+  // 필요메소 = 100000(숫자)
+  // 버튼 클릭시 = 0 + 100000 = 100000(숫자)
+  // 숫자라는 타입 => 문자열
+  // 필요메소.toString()
 }
 
-const 배열 = [1000, 4000, "응배", "배트"];
-
-// console log를 10번 반복하고 싶다
-// let i = 0;
-// i = i + 1;
-// i = 10;
-
-for (let i = 0; i < 배열.length; i++) {
-  console.log(배열[i]);
-}
-
-const 숫자 = document.getElementById("숫자");
-console.log(숫자.innerText);
-숫자.innerText = 1500;
+강화.addEventListener("click", 강화함수);
