@@ -84,3 +84,8 @@ input[type="button"]:hover {
   border: 1px solid #c6e719dc;
   color: white;
 }
+
+.star_group div {
+  display: inline-block;
+  margin: 5px 4px;
+}
