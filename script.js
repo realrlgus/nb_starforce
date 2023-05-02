@@ -6,7 +6,10 @@ const 현재별문구 = document.getElementById("현재별");
 const 다음별문구 = document.getElementById("다음별");
 const 성공확률문구 = document.getElementById("성공확률");
 const 실패확률문구 = document.getElementById("실패확률");
+const 파괴확률문구 = document.getElementById("파괴확률");
 const 필요메소문구 = document.getElementById("필요메소");
+const 파괴 = document.getElementById("파괴");
+
 let 현재별 = 0;
 
 function 강화비용계산(장비레벨) {
@@ -31,7 +34,6 @@ function 강화비용계산(장비레벨) {
 }
 
 function 강화확률계산() {
-  const 뽑은숫자 = Math.floor(Math.random() * 100) + 1;
   let 성공확률;
   let 실패확률;
   let 파괴확률 = 0;
@@ -61,23 +63,37 @@ function 강화확률계산() {
       실패확률 = 59.4;
     }
   }
-  성공확률 = 100 - 실패확률 + 파괴확률;
+  성공확률 = 100 - (실패확률 + 파괴확률);
 
-  if (뽑은숫자 > 성공확률) {
-    // 실패
-    if (현재별 > 15) {
-      현재별 = 현재별 - 1;
-    }
-  } else {
-    // 성공
-    현재별 = 현재별 + 1;
-  }
   return {
     성공확률: 성공확률,
     실패확률: 실패확률,
     파괴확률: 파괴확률,
     현재별: 현재별,
   };
+}
+
+function 강화여부() {
+  const 뽑은숫자 = Math.floor(Math.random() * 1000) + 1;
+
+  const 강화확률 = 강화확률계산();
+
+  if (뽑은숫자 > 강화확률.성공확률 * 10) {
+    // 파괴
+    if (뽑은숫자 - 강화확률.성공확률 * 10 <= 강화확률.파괴확률 * 10) {
+      현재별 = 12;
+    } else {
+      if (현재별 > 15) {
+        현재별 = 현재별 - 1;
+      }
+    }
+  } else {
+    // 성공
+    현재별 = 현재별 + 1;
+  }
+  if (현재별 > 14) {
+    파괴.classList.remove("visibility-hidden");
+  }
 }
 
 function 별색칠() {
@@ -91,21 +107,23 @@ function 별색칠() {
 }
 
 function 강화함수() {
-  const 필요메소 = 강화비용계산(140);
-
-  const 확률모음 = 강화확률계산();
-  별색칠();
-
   const 강화비용 = 강화비용계산(140);
+
+  강화여부();
+  별색칠();
+  const 확률모음 = 강화확률계산();
+
+  const 필요메소 = 강화비용계산(140);
 
   시도횟수.innerText = +시도횟수.innerText + 1;
   총메소.innerText = (
-    +총메소.innerText.replaceAll(",", "") + 필요메소
+    +총메소.innerText.replaceAll(",", "") + 강화비용
   ).toLocaleString();
   현재별문구.innerText = 확률모음.현재별;
   다음별문구.innerText = 확률모음.현재별 + 1 === 26 ? 25 : 확률모음.현재별 + 1;
   성공확률.innerText = 확률모음.성공확률.toFixed(1);
   실패확률.innerText = 확률모음.실패확률.toFixed(1);
+  파괴확률.innerText = 확률모음.파괴확률.toFixed(1);
   필요메소문구.innerText = 필요메소.toLocaleString();
 }
 

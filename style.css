@@ -89,3 +89,7 @@ input[type="button"]:hover {
   display: inline-block;
   margin: 5px 4px;
 }
+
+.visibility-hidden {
+  visibility: hidden;
+}
