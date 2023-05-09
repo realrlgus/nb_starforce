@@ -12,9 +12,16 @@
     <title>응배의 스타포스 시뮬레이터</title>
   </head>
   <body>
+    <div id="팝업" class="background visibility-hidden">
+      <div class="popup">
+        <div>강화에 실패하여<br />장비가 파괴되었습니다.</div>
+        <input type="button" value="확인" id="파괴확인" />
+      </div>
+    </div>
     <div class="container">
       <div class="header">
-        총 <span id="시도">0</span>회 시도 / 총 <span id="총메소">0</span>메소
+        총 <span id="시도">0</span>회 시도 / 총 <span id="총메소">0</span>메소 /
+        총 <span id="총파괴">0</span>회 파괴
       </div>
       <div class="box">
         <div class="boxbox">
@@ -112,8 +119,7 @@
       </div>
       <div class="footer">
         <input type="button" value="강화" id="강화버튼" />
-        <input type="button" value="복구" />
-        <input type="button" value="초기화" />
+        <input type="button" value="초기화" id="초기화버튼" />
       </div>
     </div>
     <script src="script.js"></script>
