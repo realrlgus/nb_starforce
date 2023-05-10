@@ -32,10 +32,12 @@
             <option>슈페리얼</option>
           </select>
           <span>장비 레벨</span>
-          <select>
-            <option>140</option>
-            <option>150</option>
-            <option>160</option>
+          <select id="장비레벨">
+            <option value="140">140</option>
+            <option value="150">150</option>
+            <option value="160">160</option>
+            <option value="200">200</option>
+            <option value="250">250</option>
           </select>
         </div>
         <div class="boxbox">
@@ -101,7 +103,8 @@
         </div>
         <div><span id="현재별">0</span>성 > <span id="다음별">1</span>성</div>
         <div>성공 확률:<span id="성공확률">95.0</span>%</div>
-        <div>실패(유지)확률:<span id="실패확률">5.0</span>%</div>
+        <div id="찬스타임" class="display-none">Chance Time!!!</div>
+        <div id="실패">실패(유지)확률:<span id="실패확률">5.0</span>%</div>
         <div id="파괴" class="visibility-hidden">
           파괴확률:<span id="파괴확률">0</span>%
         </div>
