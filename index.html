@@ -44,10 +44,32 @@
           <span>공격력/마력</span>
           <input type="number" name="" id="" />
           <span>시작등급</span>
-          <select>
-            <option>0성</option>
-            <option>15성</option>
-            <option>20성</option>
+          <select id="시작등급">
+            <option value="0">0성</option>
+            <option value="1">1성</option>
+            <option value="2">2성</option>
+            <option value="3">3성</option>
+            <option value="4">4성</option>
+            <option value="5">5성</option>
+            <option value="6">6성</option>
+            <option value="7">7성</option>
+            <option value="8">8성</option>
+            <option value="9">9성</option>
+            <option value="10">10성</option>
+            <option value="11">11성</option>
+            <option value="12">12성</option>
+            <option value="13">13성</option>
+            <option value="14">14성</option>
+            <option value="15">15성</option>
+            <option value="16">16성</option>
+            <option value="17">17성</option>
+            <option value="18">18성</option>
+            <option value="19">19성</option>
+            <option value="20">20성</option>
+            <option value="21">21성</option>
+            <option value="22">22성</option>
+            <option value="23">23성</option>
+            <option value="24">24성</option>
           </select>
         </div>
         <div class="boxbox">
@@ -57,9 +79,9 @@
             <option>해제</option>
           </select>
           <span>파괴방지</span>
-          <select>
-            <option>사용</option>
-            <option>해제</option>
+          <select id="파괴방지">
+            <option value="0">해제</option>
+            <option value="1">사용</option>
           </select>
         </div>
         <div class="star_group">
@@ -101,18 +123,22 @@
             <i class="fa-regular fa-star"></i>
           </div>
         </div>
-        <div><span id="현재별">0</span>성 > <span id="다음별">1</span>성</div>
-        <div>성공 확률:<span id="성공확률">95.0</span>%</div>
-        <div id="찬스타임" class="display-none">Chance Time!!!</div>
-        <div id="실패">실패(유지)확률:<span id="실패확률">5.0</span>%</div>
-        <div id="파괴" class="visibility-hidden">
-          파괴확률:<span id="파괴확률">0</span>%
+
+        <div id="25" class="display-none">
+          <span>25성</span>
+          <div>25성 달성</div>
         </div>
-        <br />
-        <div>필요한 메소: <span id="필요메소">110,800 </span></div>
-        <br />
-        <div>스탯:0 (+2)</div>
-        <div>공 / 마:0 (+1)</div>
+        <div id="24">
+          <div><span id="현재별">0</span>성 > <span id="다음별">1</span>성</div>
+          <div>성공 확률:<span id="성공확률">95.0</span>%</div>
+          <div id="찬스타임" class="display-none">Chance Time!!!</div>
+          <div id="실패">실패(유지)확률:<span id="실패확률">5.0</span>%</div>
+          <div id="파괴" class="visibility-hidden">
+            파괴확률:<span id="파괴확률">0</span>%
+          </div>
+          <br />
+          <div>필요한 메소: <span id="필요메소">110,800 </span></div>
+        </div>
       </div>
       <div class="avatar">
         <img

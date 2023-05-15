@@ -16,10 +16,15 @@ const 초기화버튼 = document.getElementById("초기화버튼");
 const 실패 = document.getElementById("실패");
 const 찬스타임 = document.getElementById("찬스타임");
 const 장비레벨선택 = document.getElementById("장비레벨");
+const 시작등급선택 = document.getElementById("시작등급");
+const 최고등급달성 = document.getElementById("25");
+const 그외등급달성 = document.getElementById("24");
+const 파괴방지 = document.getElementById("파괴방지");
 
-let 현재별 = 24;
+let 현재별 = 0;
 let 연속실패횟수 = 0;
 let 장비레벨 = 140;
+let 파괴방지여부 = 0;
 
 function 강화비용계산(장비레벨) {
   let 강화비용;
@@ -41,6 +46,9 @@ function 강화비용계산(장비레벨) {
   강화비용 = Math.round(강화비용 / 100) * 100;
   return 강화비용;
 }
+function 파괴방지체크() {
+  return 현재별 > 14 && 현재별 < 17 && 파괴방지여부 === 1;
+}
 
 function 강화확률계산() {
   let 성공확률;
@@ -55,6 +63,10 @@ function 강화확률계산() {
     if (현재별 < 18) {
       파괴확률 = 2.1;
       실패확률 = 67.9;
+      if (파괴방지체크()) {
+        실패확률 = 70;
+        파괴확률 = 0;
+      }
     } else if (현재별 < 20) {
       파괴확률 = 2.8;
       실패확률 = 67.2;
@@ -70,8 +82,6 @@ function 강화확률계산() {
     } else if (현재별 === 24) {
       // 파괴확률 = 39.6;
       // 실패확률 = 59.4;
-
-      파괴확률 = 0;
       실패확률 = 0;
     }
   }
@@ -81,12 +91,26 @@ function 강화확률계산() {
     파괴확률 = 0;
     실패확률 = 0;
     실패.classList.add("display-none");
-    파괴.classList.add("visibility-hidden");
     찬스타임.classList.remove("display-none");
   } else {
     실패.classList.remove("display-none");
-    파괴.classList.remove("visibility-hidden");
     찬스타임.classList.add("display-none");
+  }
+
+  if (파괴확률 === 0) {
+    파괴.classList.add("visibility-hidden");
+  } else {
+    파괴.classList.remove("visibility-hidden");
+  }
+
+  if (현재별 === 25) {
+    최고등급달성.classList.remove("display-none");
+    그외등급달성.classList.add("display-none");
+    강화.setAttribute("disabled", "");
+  } else {
+    최고등급달성.classList.add("display-none");
+    그외등급달성.classList.remove("display-none");
+    강화.removeAttribute("disabled");
   }
 
   성공확률 = 100 - (실패확률 + 파괴확률);
@@ -136,13 +160,17 @@ function 별색칠() {
 }
 
 function 강화함수() {
-  const 강화비용 = 강화비용계산(장비레벨);
+  const 강화비용 = 파괴방지체크()
+    ? 강화비용계산(장비레벨) * 2
+    : 강화비용계산(장비레벨);
 
   강화여부();
   별색칠();
   const 확률모음 = 강화확률계산();
 
-  const 필요메소 = 강화비용계산(장비레벨);
+  const 필요메소 = 파괴방지체크()
+    ? 강화비용계산(장비레벨) * 2
+    : 강화비용계산(장비레벨);
 
   시도횟수.innerText = +시도횟수.innerText + 1;
   총메소.innerText = (
@@ -156,11 +184,15 @@ function 강화함수() {
   필요메소문구.innerText = 필요메소.toLocaleString();
 }
 
-function 초기화함수() {
-  현재별 = 0;
+function 초기화함수(시작등급 = 0) {
+  현재별 = 시작등급;
   const 확률모음 = 강화확률계산();
-  const 필요메소 = 강화비용계산(장비레벨);
+  const 필요메소 = 파괴방지체크()
+    ? 강화비용계산(장비레벨) * 2
+    : 강화비용계산(장비레벨);
   별색칠();
+
+  연속실패횟수 = 0;
 
   시도횟수.innerText = 0;
   총메소.innerText = 0;
@@ -170,7 +202,6 @@ function 초기화함수() {
   실패확률.innerText = 확률모음.실패확률.toFixed(1);
   파괴확률.innerText = 확률모음.파괴확률.toFixed(1);
   필요메소문구.innerText = 필요메소.toLocaleString();
-  파괴.classList.add("visibility-hidden");
   총파괴.innerText = 0;
 }
 
@@ -179,7 +210,12 @@ function 초기화함수() {
   팝업.classList.add("visibility-hidden");
   파괴.classList.add("visibility-hidden");
 });
-초기화버튼.addEventListener("click", 초기화함수);
+초기화버튼.addEventListener("click", function () {
+  const 시작등급선택값 = document.querySelector(
+    "#시작등급 option:checked"
+  ).value;
+  초기화함수(+시작등급선택값);
+});
 
 장비레벨선택.addEventListener("change", function () {
   const 장비레벨선택값 = document.querySelector(
@@ -187,4 +223,28 @@ function 초기화함수() {
   ).value;
   장비레벨 = 장비레벨선택값;
   초기화함수();
+});
+
+시작등급선택.addEventListener("change", function () {
+  const 시작등급선택값 = document.querySelector(
+    "#시작등급 option:checked"
+  ).value;
+  초기화함수(+시작등급선택값);
+});
+
+파괴방지.addEventListener("change", function () {
+  const 파괴방지선택값 = document.querySelector(
+    "#파괴방지 option:checked"
+  ).value;
+  파괴방지여부 = +파괴방지선택값;
+
+  const 확률모음 = 강화확률계산();
+  const 필요메소 = 파괴방지체크()
+    ? 강화비용계산(장비레벨) * 2
+    : 강화비용계산(장비레벨);
+
+  성공확률.innerText = 확률모음.성공확률.toFixed(1);
+  실패확률.innerText = 확률모음.실패확률.toFixed(1);
+  파괴확률.innerText = 확률모음.파괴확률.toFixed(1);
+  필요메소문구.innerText = 필요메소.toLocaleString();
 });
